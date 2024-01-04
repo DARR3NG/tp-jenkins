@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
     @GetMapping
     public String hello(){
-        return "Hello enjlsssfdd from spring boot application :)";
+        return "Hello enjlsssfdddd from spring boot application :)";
     }
 
     @GetMapping("/user")
