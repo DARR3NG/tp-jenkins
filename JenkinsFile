@@ -38,12 +38,11 @@ pipeline {
 stage('Run') {
     steps {
         script {
-     
-            
             dir('POV-JAVA') {
-             
+                // Supprimer le conteneur s'il existe déjà
+                bat "docker rm -f test-pos || true"
 
-                // Utiliser le nom de l'image Docker (lachgar/pos) dans la commande docker run
+                // Créer un nouveau conteneur
                 bat "docker run --name test-pos -d -p 8585:8282 lachgar/pos ."
             }
         }
