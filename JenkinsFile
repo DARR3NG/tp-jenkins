@@ -39,10 +39,10 @@ stage('Run') {
     steps {
         script {
             dir('POV-JAVA') {
-                // Supprimer le conteneur s'il existe déjà
+
                 bat "docker rm -f test-pos || true"
 
-                // Créer un nouveau conteneur
+
                 bat "docker run --name test-pos -d -p 8585:8282 lachgar/pos ."
             }
         }
