@@ -8,7 +8,7 @@ pipeline {
         stage('Git Clone') {
             steps {
                 script {
-                    checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'd0efaef6-513b-4da6-9840-87eedae8013f', url: 'https://github.com/DARR3NG/tp-jenkins.git']])
+                    checkout scmGit(branches: [[name: '*/main']], extensions: [], url: 'https://github.com/DARR3NG/tp-jenkins.git']])
     
                 }
             }
