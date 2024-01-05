@@ -1,0 +1,54 @@
+pipeline {
+    agent any
+    tools {
+        maven 'maven'
+    }
+    
+    stages {
+        stage('Git Clone') {
+            steps {
+                script {
+                    checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'd0efaef6-513b-4da6-9840-87eedae8013f', url: 'https://github.com/DARR3NG/tp-jenkins.git']])
+    
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                dir('POV-JAVA'){
+                
+                bat 'mvn clean install'
+                }
+            }
+        }
+
+        stage('Create Docker Image') {
+            steps {
+                dir('POV-JAVA'){
+                bat 'docker image rm -f lachgar/pos || true'
+                bat 'docker build -t  lachgar/pos .'
+                }
+            }
+        }
+
+        
+
+
+stage('Run') {
+    steps {
+        script {
+     
+            
+            dir('POV-JAVA') {
+             
+
+                // Utiliser le nom de l'image Docker (lachgar/pos) dans la commande docker run
+                bat "docker run --name test-pos -d -p 8585:8282 lachgar/pos ."
+            }
+        }
+    }
+}
+
+    }
+}
